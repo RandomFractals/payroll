@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNet.Builder;
+﻿using Microsoft.AspNet.Builder;
+using Microsoft.AspNet.Diagnostics;
 using Microsoft.AspNet.Hosting;
+using Microsoft.Data.Entity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+
+using payroll.Models;
 
 namespace payroll
 {
@@ -36,6 +36,13 @@ namespace payroll
             services.AddApplicationInsightsTelemetry(Configuration);
 
             services.AddMvc();
+
+            services.AddEntityFramework()
+                .AddSqlServer()
+                .AddDbContext<EmployeeContext>(options =>
+                {
+                    options.UseSqlServer(Configuration["Data:ConnectionString"]);
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -68,6 +75,8 @@ namespace payroll
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            SampleData.Initialize(app.ApplicationServices);
         }
 
         // Entry point for the application.

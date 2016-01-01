@@ -24,7 +24,7 @@ namespace payroll.Models
                         LastName = "Don",
                         Employee = janeDoe,
                         Relationship = Relationship.Spouse
-                    }
+                    },
                     new Dependent()
                     {
                         FirstName = "Sally",
