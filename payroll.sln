@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{3978F5BC-B918-4637-B4B2-5273DF9C13E9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{627F0A56-74AA-45D8-A77B-AD0F0FFCEFF0}"
+	ProjectSection(SolutionItems) = preProject
+		global.json = global.json
+	EndProjectSection
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "payroll", "src\payroll\payroll.xproj", "{E497BE0E-E1B4-4B12-A543-392D92F0D13F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E497BE0E-E1B4-4B12-A543-392D92F0D13F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E497BE0E-E1B4-4B12-A543-392D92F0D13F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E497BE0E-E1B4-4B12-A543-392D92F0D13F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E497BE0E-E1B4-4B12-A543-392D92F0D13F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E497BE0E-E1B4-4B12-A543-392D92F0D13F} = {3978F5BC-B918-4637-B4B2-5273DF9C13E9}
+	EndGlobalSection
+EndGlobal
