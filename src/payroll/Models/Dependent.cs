@@ -4,7 +4,7 @@ namespace payroll.Models
 {
     public class Dependent: Person
     {
-        public int EmployeeID { get; set; }
+        public int DependentID { get; set; }
 
         [Display(Name = "Relationship")]
         public Relationship Relationship { get; set; }
