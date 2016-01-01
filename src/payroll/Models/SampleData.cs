@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Microsoft.Data.Entity;
-using Microsoft.Framework.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Data.Entity.Storage;
 
 namespace payroll.Models
@@ -12,7 +12,7 @@ namespace payroll.Models
 		{
 
             var context = serviceProvider.GetService<EmployeeContext>();
-			if (serviceProvider.GetService<IRelationalDatabaseCreator>().Exists())
+			if ( serviceProvider.GetService<IRelationalDatabaseCreator>().Exists() )
 			{
 				var janeDoe = context.Employees.Add(
 					new Employee { FirstName = "Jane", LastName = "Doe", Salary = 52000}).Entity;
