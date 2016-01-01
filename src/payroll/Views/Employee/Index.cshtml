@@ -2,3 +2,43 @@
 @{ 
     ViewBag.Title = "Employees";
 }
+
+<p>
+    <!--
+    <a asp-action="Create">Add New Employee</a>
+        -->
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Salary)
+        </th>
+        <td>
+            Dependents
+        </td>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Salary)
+            </td>
+            <td>
+                <!-- todo: add dependents count and link to dependents view -->
+            </td>
+        </tr>
+    }
+</table>
