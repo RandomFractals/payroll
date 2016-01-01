@@ -18,7 +18,6 @@ namespace payroll.Migrations
                     FirstName = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
                     MiddleName = table.Column<string>(nullable: true),
-                    PersonID = table.Column<int>(nullable: false),
                     Salary = table.Column<decimal>(nullable: false)
                 },
                 constraints: table =>
@@ -35,7 +34,6 @@ namespace payroll.Migrations
                     FirstName = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
                     MiddleName = table.Column<string>(nullable: true),
-                    PersonID = table.Column<int>(nullable: false),
                     Relationship = table.Column<int>(nullable: false)
                 },
                 constraints: table =>

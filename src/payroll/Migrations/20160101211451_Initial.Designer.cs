@@ -30,8 +30,6 @@ namespace payroll.Migrations
 
                     b.Property<string>("MiddleName");
 
-                    b.Property<int>("PersonID");
-
                     b.Property<int>("Relationship");
 
                     b.HasKey("DependentID");
@@ -47,8 +45,6 @@ namespace payroll.Migrations
                     b.Property<string>("LastName");
 
                     b.Property<string>("MiddleName");
-
-                    b.Property<int>("PersonID");
 
                     b.Property<decimal>("Salary");
 

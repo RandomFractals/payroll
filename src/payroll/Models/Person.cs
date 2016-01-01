@@ -4,8 +4,6 @@ namespace payroll.Models
 {
     public class Person
     {
-        public int PersonID { get; set;  }
-
         [Display(Name = "First Name")]
         public string FirstName { get; set;  }
 
