@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace payroll.Models
 {
@@ -11,5 +12,7 @@ namespace payroll.Models
         [Required]
         [Range(1, 1000000000)]
         public decimal Salary { get; set;  }
+
+        public List<Dependent> Dependents { get; set; }
     }
 }
