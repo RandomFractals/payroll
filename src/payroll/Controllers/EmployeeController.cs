@@ -28,7 +28,7 @@ namespace payroll.Controllers
 
         public async Task<ActionResult> EmployeeInfo(int id)
         {
-            Employee employee = await EmployeeDataContext.Employees
+            Employee employee = await EmployeeDataContext.Employees//.Include("Dependents")
                 .SingleOrDefaultAsync(e => e.EmployeeID == id);
 
             if (employee == null)

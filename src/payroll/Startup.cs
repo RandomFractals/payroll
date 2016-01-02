@@ -37,6 +37,7 @@ namespace payroll
 
             services.AddMvc();
 
+            // add employee data context service for dependency injection
             services.AddEntityFramework()
                 .AddSqlServer()
                 .AddDbContext<EmployeeDataContext>(options =>
