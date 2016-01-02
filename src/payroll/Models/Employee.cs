@@ -14,6 +14,7 @@ namespace payroll.Models
         public decimal Salary { get; set;  }
 
         // dependents list navigation property
-        public List<Dependent> Dependents { get; set; }
+        [Display(Name = "Dependents")]
+        public ICollection<Dependent> Dependents { get; set; }
     }
 }

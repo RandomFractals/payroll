@@ -20,15 +20,16 @@ namespace payroll.Controllers
         // GET: /<controller>/
         public IActionResult Index()
         {
-            var employees = EmployeeDataContext.Employees;
-
+            var employees = EmployeeDataContext.Employees
+                .Include(e => e.Dependents);
             return View(employees);
         }
 
 
         public async Task<ActionResult> EmployeeInfo(int id)
         {
-            Employee employee = await EmployeeDataContext.Employees//.Include("Dependents")
+            Employee employee = await EmployeeDataContext.Employees
+                .Include( e => e.Dependents)
                 .SingleOrDefaultAsync(e => e.EmployeeID == id);
 
             if (employee == null)
@@ -138,7 +139,9 @@ namespace payroll.Controllers
 
         private Task<Employee> GetEmployeeAsync(int id)
         {
-            return EmployeeDataContext.Employees.SingleOrDefaultAsync(employee => employee.EmployeeID == id);
+            return EmployeeDataContext.Employees
+                .Include(e => e.Dependents)
+                .SingleOrDefaultAsync(e => e.EmployeeID == id);
         }
     }
 }

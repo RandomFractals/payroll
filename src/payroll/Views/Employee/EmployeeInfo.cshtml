@@ -17,6 +17,9 @@
     </dl>
 </div>
 <hr />
+<h3>@Html.DisplayNameFor(model => model.Dependents)</h3>
+@Model.Dependents.Count
+<hr />
 <p>
     <a asp-action="EditEmployee" asp-route-id="@Model.EmployeeID">Edit</a> |
     <a asp-action="Index">Back to List</a>
