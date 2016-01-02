@@ -36,5 +36,10 @@ namespace payroll.Controllers
 
             return View(employee);
         }
+
+        public ActionResult EditEmployee()
+        {
+            return View();
+        }
     }
 }
