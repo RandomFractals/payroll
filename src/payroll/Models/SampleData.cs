@@ -11,7 +11,7 @@ namespace payroll.Models
 		public static void Initialize(IServiceProvider serviceProvider)
 		{
 
-            var context = serviceProvider.GetService<EmployeeContext>();
+            var context = serviceProvider.GetService<EmployeeDataContext>();
 			if ( serviceProvider.GetService<IRelationalDatabaseCreator>().Exists() )
 			{
 				var janeDoe = context.Employees.Add(

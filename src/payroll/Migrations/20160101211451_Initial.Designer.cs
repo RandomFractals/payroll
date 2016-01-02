@@ -7,7 +7,7 @@ using payroll.Models;
 
 namespace payroll.Migrations
 {
-    [DbContext(typeof(EmployeeContext))]
+    [DbContext(typeof(EmployeeDataContext))]
     [Migration("20160101211451_Initial")]
     partial class Initial
     {

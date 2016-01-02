@@ -14,7 +14,7 @@ namespace payroll.Controllers
     public class EmployeeController : Controller
     {
         [FromServices]
-        public EmployeeContext EmployeeContext { get; set; }        
+        public EmployeeDataContext EmployeeContext { get; set; }        
 
 
         // GET: /<controller>/

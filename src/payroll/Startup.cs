@@ -39,7 +39,7 @@ namespace payroll
 
             services.AddEntityFramework()
                 .AddSqlServer()
-                .AddDbContext<EmployeeContext>(options =>
+                .AddDbContext<EmployeeDataContext>(options =>
                 {
                     options.UseSqlServer(Configuration["Data:ConnectionString"]);
                 });
