@@ -1,53 +1,64 @@
 ﻿@model payroll.Models.Employee
-@{ 
-    ViewBag.Title = "Employee Info";
+@{
+    ViewBag.Title = "Employee";
 }
-<h2>@ViewData["Title"]</h2>
-<hr />
-<div>
-    <dl class="dl-horizontal">
-        <dt>@Html.DisplayNameFor(model => model.FirstName)</dt>
-        <dd>@Html.DisplayFor(model => model.FirstName)</dd>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">@ViewData["Title"]</h3>
+    </div>
+    <div class="panel-body">
+        <div>
+            <dl class="dl-horizontal">
+                <dt>@Html.DisplayNameFor(model => model.FirstName)</dt>
+                <dd>@Html.DisplayFor(model => model.FirstName)</dd>
 
-        <dt>@Html.DisplayNameFor(model => model.LastName)</dt>
-        <dd>@Html.DisplayFor(model => model.LastName)</dd>
+                <dt>@Html.DisplayNameFor(model => model.LastName)</dt>
+                <dd>@Html.DisplayFor(model => model.LastName)</dd>
 
-        <dt>@Html.DisplayNameFor(model => model.Salary)</dt>
-        <dd>@Html.DisplayFor(model => model.Salary)</dd>
-    </dl>
+                <dt>@Html.DisplayNameFor(model => model.Salary)</dt>
+                <dd>@Html.DisplayFor(model => model.Salary)</dd>
+            </dl>
+        </div>
+    </div>
+    <div class="panel-footer">
+        <a asp-action="EditEmployee" asp-route-id="@Model.EmployeeID">Edit Employee</a> |
+        <a asp-action="Index">Back to List</a>
+    </div>
 </div>
-<hr />
-<p>
-    <a asp-action="EditEmployee" asp-route-id="@Model.EmployeeID">Edit Employee</a> |
-    <a asp-action="Index">Back to List</a>
-</p>
-<hr />
-<h3>@Html.DisplayNameFor(model => model.Dependents) - @Model.Dependents.Count</h3>
-<table class="table">
-    <tr>
-        <th>Name</th>
-        <th>Relationship</th>
-        <th>Actions</th>
-    </tr>
-    @foreach (var item in Model.Dependents)
-    {
-        <tr>
-            <td>
-                <a asp-action="EditDependent" asp-route-id="@item.DependentID">
-                    @Html.DisplayFor(modelItem => item.FirstName)
-                    @Html.DisplayFor(modelItem => item.LastName)
-                </a>
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Relationship)
-            </td>
-            <td>
-                <a asp-action="DeleteDependent" asp-route-id="@item.DependentID">Delete</a>
-            </td>
-        </tr>
-    }
-</table>
-<hr />
-<p>
-    <a asp-action="AddDependent" asp-route-id="@Model.EmployeeID">Add New Dependent</a>
-</p>
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">@Html.DisplayNameFor(model => model.Dependents)</h3>
+    </div>
+    <div class="panel-body">
+        <table class="table">
+            <tr>
+                <th>Name</th>
+                <th>Relationship</th>
+                <th>Actions</th>
+            </tr>
+            @foreach (var item in Model.Dependents)
+            {
+                <tr>
+                    <td>
+                        <a asp-action="EditDependent" asp-route-id="@item.DependentID">
+                            @Html.DisplayFor(modelItem => item.FirstName)
+                            @Html.DisplayFor(modelItem => item.LastName)
+                        </a>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Relationship)
+                    </td>
+                    <td>
+                        <a asp-action="DeleteDependent" asp-route-id="@item.DependentID">Delete</a>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+    <div class="panel-footer">
+        <a asp-action="AddDependent" asp-route-id="@Model.EmployeeID">Add Dependent</a>
+    </div>
+</div>
+
+
