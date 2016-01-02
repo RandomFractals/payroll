@@ -45,6 +45,28 @@ namespace payroll.Controllers
             return View();
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> SaveEmployee(
+            [Bind("FirstName", "LastName", "Salary")] Employee employee)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    EmployeeContext.Employees.Add(employee);
+                    await EmployeeContext.SaveChangesAsync();
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (DbUpdateException)
+            {
+                ModelState.AddModelError(string.Empty, "Could not create new employee.");
+            }
+
+            return View(employee);
+        }
+
 
         public async Task<ActionResult> EditEmployee(int id)
         {
