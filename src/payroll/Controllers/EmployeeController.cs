@@ -45,6 +45,7 @@ namespace payroll.Controllers
             return View();
         }
 
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> SaveEmployee(
@@ -97,6 +98,41 @@ namespace payroll.Controllers
                 ModelState.AddModelError(string.Empty, "Failed to save employee info updates.");
             }
             return View(employee);
+        }
+
+
+        [HttpGet]
+        [ActionName("DeleteEmployee")]
+        public async Task<ActionResult> ConfirmDelete(int id, bool? retry)
+        {
+            Employee employee = await GetEmployeeAsync(id);
+            if (employee == null)
+            {
+                return HttpNotFound();
+            }
+
+            ViewBag.Retry = retry ?? false;
+
+            return View(employee);
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> DeleteEmployee(int id)
+        {
+            try
+            {
+                Employee employee = await GetEmployeeAsync(id);
+                EmployeeContext.Employees.Remove(employee);
+                await EmployeeContext.SaveChangesAsync();
+            }
+            catch(DbUpdateException)
+            {
+                return RedirectToAction("DeleteEmployee", new { id = id, retry = true });
+            }
+
+            return RedirectToAction("Index");
         }
 
 
