@@ -38,13 +38,15 @@
                 </div>
             </div>
         </div>
-        <div class="container body-content">
+        <div class="container">
             @RenderBody()
-            <hr />
-            <footer>
-                <p>&copy; 2016 XYZ Payroll</p>
-            </footer>
         </div>
+
+        <footer class="footer">
+            <div class="container">
+                <p class="text-muted">&copy; 2016 XYZ Payroll</p>
+            </div>
+        </footer>
 
         <environment names="Development">
             <script src="~/lib/jquery/dist/jquery.js"></script>
