@@ -16,6 +16,7 @@ namespace payroll.Controllers
         [FromServices]
         public EmployeeContext EmployeeContext { get; set; }        
 
+
         // GET: /<controller>/
         public IActionResult Index()
         {
@@ -23,6 +24,7 @@ namespace payroll.Controllers
 
             return View(employees);
         }
+
 
         public async Task<ActionResult> EmployeeInfo(int id)
         {
@@ -37,6 +39,13 @@ namespace payroll.Controllers
             return View(employee);
         }
 
+
+        public ActionResult AddEmployee()
+        {
+            return View();
+        }
+
+
         public async Task<ActionResult> EditEmployee(int id)
         {
             Employee employee = await GetEmployeeAsync(id);
@@ -49,7 +58,8 @@ namespace payroll.Controllers
             return View(employee);
         }
 
-        public async Task<ActionResult> Update(int id, 
+
+        public async Task<ActionResult> UpdateEmployee(int id, 
             [Bind("FirstName", "LastName", "Salary")] Employee employee)
         {
             try
