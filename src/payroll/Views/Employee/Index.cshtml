@@ -11,44 +11,31 @@
 
 <table class="table">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LastName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Salary)
-        </th>
-        <th>
-            Dependents
-        </th>
-        <th>
-            Deductions
-        </th>
-        <th></th>
+        <th>Employee</th>
+        <th>@Html.DisplayNameFor(model => model.Salary)</th>
+        <th>Dependents</th>
+        <th>Deductions</th>
+        <th>Actions</th>
     </tr>
     @foreach (var item in Model)
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastName)
+                <a asp-action="EditEmployee" asp-route-id="@item.EmployeeID">
+                    @Html.DisplayFor(modelItem => item.FirstName) 
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </a>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Salary)
             </td>
             <td>
-                <!-- todo: add dependents count and link to dependents view -->
+                <a asp-action="EmployeeInfo" asp-route-id="@item.EmployeeID">Info</a>
             </td>
             <td>
                 <!-- todo: add deductions amount display  -->
             </td>
             <td>
-                <a asp-action="EditEmployee" asp-route-id="@item.EmployeeID">Edit</a> |
-                <a asp-action="EmployeeInfo" asp-route-id="@item.EmployeeID">Info</a> |
                 <a asp-action="DeleteEmployee" asp-route-id="@item.EmployeeID">Delete</a>
             </td>
         </tr>
