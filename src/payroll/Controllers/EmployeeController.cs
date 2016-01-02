@@ -14,13 +14,13 @@ namespace payroll.Controllers
     public class EmployeeController : Controller
     {
         [FromServices]
-        public EmployeeDataContext EmployeeContext { get; set; }        
+        public EmployeeDataContext EmployeeDataContext { get; set; }        
 
 
         // GET: /<controller>/
         public IActionResult Index()
         {
-            var employees = EmployeeContext.Employees;
+            var employees = EmployeeDataContext.Employees;
 
             return View(employees);
         }
@@ -28,7 +28,7 @@ namespace payroll.Controllers
 
         public async Task<ActionResult> EmployeeInfo(int id)
         {
-            Employee employee = await EmployeeContext.Employees
+            Employee employee = await EmployeeDataContext.Employees
                 .SingleOrDefaultAsync(e => e.EmployeeID == id);
 
             if (employee == null)
@@ -55,8 +55,8 @@ namespace payroll.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    EmployeeContext.Employees.Add(employee);
-                    await EmployeeContext.SaveChangesAsync();
+                    EmployeeDataContext.Employees.Add(employee);
+                    await EmployeeDataContext.SaveChangesAsync();
                     return RedirectToAction("Index");
                 }
             }
@@ -88,9 +88,9 @@ namespace payroll.Controllers
             try
             {
                 employee.EmployeeID = id;
-                EmployeeContext.Employees.Attach(employee);
-                EmployeeContext.Entry(employee).State = EntityState.Modified;
-                await EmployeeContext.SaveChangesAsync();
+                EmployeeDataContext.Employees.Attach(employee);
+                EmployeeDataContext.Entry(employee).State = EntityState.Modified;
+                await EmployeeDataContext.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
             catch (DbUpdateException)
@@ -124,8 +124,8 @@ namespace payroll.Controllers
             try
             {
                 Employee employee = await GetEmployeeAsync(id);
-                EmployeeContext.Employees.Remove(employee);
-                await EmployeeContext.SaveChangesAsync();
+                EmployeeDataContext.Employees.Remove(employee);
+                await EmployeeDataContext.SaveChangesAsync();
             }
             catch(DbUpdateException)
             {
@@ -138,7 +138,7 @@ namespace payroll.Controllers
 
         private Task<Employee> GetEmployeeAsync(int id)
         {
-            return EmployeeContext.Employees.SingleOrDefaultAsync(employee => employee.EmployeeID == id);
+            return EmployeeDataContext.Employees.SingleOrDefaultAsync(employee => employee.EmployeeID == id);
         }
     }
 }
