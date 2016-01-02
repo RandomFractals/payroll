@@ -17,10 +17,37 @@
     </dl>
 </div>
 <hr />
-<h3>@Html.DisplayNameFor(model => model.Dependents)</h3>
-@Model.Dependents.Count
+<p>
+    <a asp-action="EditEmployee" asp-route-id="@Model.EmployeeID">Edit Employee</a> |
+    <a asp-action="Index">Back to List</a>
+</p>
+<hr />
+<h3>@Html.DisplayNameFor(model => model.Dependents) - @Model.Dependents.Count</h3>
+<table class="table">
+    <tr>
+        <th>Name</th>
+        <th>Relationship</th>
+        <th>Actions</th>
+    </tr>
+    @foreach (var item in Model.Dependents)
+    {
+        <tr>
+            <td>
+                <a asp-action="EditDependent" asp-route-id="@item.DependentID">
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Relationship)
+            </td>
+            <td>
+                <a asp-action="DeleteDependent" asp-route-id="@item.DependentID">Delete</a>
+            </td>
+        </tr>
+    }
+</table>
 <hr />
 <p>
-    <a asp-action="EditEmployee" asp-route-id="@Model.EmployeeID">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="AddDependent" asp-route-id="@Model.EmployeeID">Add New Dependent</a>
 </p>
