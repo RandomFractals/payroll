@@ -37,9 +37,40 @@ namespace payroll.Controllers
             return View(employee);
         }
 
-        public ActionResult EditEmployee()
+        public async Task<ActionResult> EditEmployee(int id)
         {
-            return View();
+            Employee employee = await GetEmployeeAsync(id);
+
+            if (employee == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(employee);
+        }
+
+        public async Task<ActionResult> Update(int id, 
+            [Bind("FirstName", "LastName", "Salary")] Employee employee)
+        {
+            try
+            {
+                employee.EmployeeID = id;
+                EmployeeContext.Employees.Attach(employee);
+                EmployeeContext.Entry(employee).State = EntityState.Modified;
+                await EmployeeContext.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            catch (DbUpdateException)
+            {
+                ModelState.AddModelError(string.Empty, "Failed to save employee info updates.");
+            }
+            return View(employee);
+        }
+
+
+        private Task<Employee> GetEmployeeAsync(int id)
+        {
+            return EmployeeContext.Employees.SingleOrDefaultAsync(employee => employee.EmployeeID == id);
         }
     }
 }
