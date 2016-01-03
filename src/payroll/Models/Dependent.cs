@@ -9,6 +9,8 @@ namespace payroll.Models
         [Display(Name = "Relationship")]
         public Relationship Relationship { get; set; }
 
+        public int EmployeeID { get; set; }
+
         // navigation property
         public Employee Employee { get; set; }
     }

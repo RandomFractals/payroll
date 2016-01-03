@@ -8,9 +8,10 @@ using payroll.Models;
 namespace payroll.Migrations
 {
     [DbContext(typeof(EmployeeDataContext))]
-    partial class EmployeeContextModelSnapshot : ModelSnapshot
+    [Migration("20160103064107_DependentEmployeeID")]
+    partial class DependentEmployeeID
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "7.0.0-rc1-16348")

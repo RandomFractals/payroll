@@ -13,7 +13,7 @@ namespace payroll.Models
         [Range(10000, 1000000000)]
         public decimal Salary { get; set;  }
 
-        // dependents list navigation property
+
         [Display(Name = "Dependents")]
         public ICollection<Dependent> Dependents { get; set; }
     }
