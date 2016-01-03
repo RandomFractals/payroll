@@ -2,29 +2,15 @@
 @{
     ViewBag.Title = "Employee";
 }
-<div class="panel panel-default">
-    <div class="panel-heading">
-        <h3 class="panel-title">@ViewData["Title"]</h3>
-    </div>
-    <div class="panel-body">
-        <div>
-            <dl class="dl-horizontal">
-                <dt>@Html.DisplayNameFor(model => model.FirstName)</dt>
-                <dd>@Html.DisplayFor(model => model.FirstName)</dd>
-
-                <dt>@Html.DisplayNameFor(model => model.LastName)</dt>
-                <dd>@Html.DisplayFor(model => model.LastName)</dd>
-
-                <dt>@Html.DisplayNameFor(model => model.Salary)</dt>
-                <dd>@Html.DisplayFor(model => model.Salary)</dd>
-            </dl>
-        </div>
-    </div>
-    <div class="panel-footer">
-        <a asp-action="EditEmployee" asp-route-id="@Model.EmployeeID">Edit Employee</a> |
-        <a asp-action="Index">Back to List</a>
-    </div>
-</div>
+<ol class="breadcrumb">
+    <li><a asp-action="Index">Employees</a></li>
+    <li>
+        <a asp-action="EditEmployee" asp-route-id="@Model.EmployeeID">
+            @Html.DisplayFor(model => model.FirstName)
+            @Html.DisplayFor(model => model.LastName)
+        </a>
+    </li>
+</ol>
 
 <div class="panel panel-primary">
     <div class="panel-heading">
@@ -57,8 +43,7 @@
         </table>
     </div>
     <div class="panel-footer">
-        <a asp-action="AddDependent" asp-route-id="@Model.EmployeeID">Add Dependent</a> |
-        <a asp-action="Index">Back to Employee List</a>
+        <a asp-action="AddDependent" asp-route-id="@Model.EmployeeID">Add Dependent</a>
     </div>
 </div>
 
