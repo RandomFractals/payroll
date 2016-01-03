@@ -17,7 +17,6 @@ namespace payroll.Controllers
         [FromServices]
         public EmployeeDataContext EmployeeDataContext { get; set; }
 
-
         public async Task<ActionResult> EmployeeInfo(int id)
         {
             Employee employee = await EmployeeDataContext.Employees
@@ -32,16 +31,6 @@ namespace payroll.Controllers
             return View(employee);
         }
 
-        /*
-        public IActionResult AddDependent(int employeeId)
-        {
-            Employee employee = EmployeeDataContext.Employees
-                .SingleOrDefault(e => e.EmployeeID == employeeId);
-
-            ViewBag.Employee = employee;
-
-            return View();
-        }*/
 
         public async Task<ActionResult> AddDependent(int id)
         {
@@ -62,10 +51,25 @@ namespace payroll.Controllers
         }
 
 
+        public async Task<ActionResult> EditDependent(int id)
+        {
+            Dependent dependent = await GetDependentAsync(id);
+
+            if (dependent == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(dependent);
+        }
+
         private Task<Dependent> GetDependentAsync(int id)
         {
             return EmployeeDataContext.Dependents
+                //.SingleOrDefaultAsync(d => d.DependentID == id);
+                .Include(e => e.Employee)
                 .SingleOrDefaultAsync(d => d.DependentID == id);
+
         }
     }
 }

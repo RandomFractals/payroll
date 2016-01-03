@@ -27,7 +27,8 @@
             {
                 <tr>
                     <td>
-                        <a asp-action="EditDependent" asp-route-id="@item.DependentID">
+                        <a asp-controller="Dependent" asp-action="EditDependent" 
+                           asp-route-id="@item.DependentID">
                             @Html.DisplayFor(modelItem => item.FirstName)
                             @Html.DisplayFor(modelItem => item.LastName)
                         </a>
@@ -36,7 +37,8 @@
                         @Html.DisplayFor(modelItem => item.Relationship)
                     </td>
                     <td>
-                        <a asp-action="DeleteDependent" asp-route-id="@item.DependentID">Delete</a>
+                        <a asp-controller="Dependent" asp-action="DeleteDependent" 
+                           asp-route-id="@item.DependentID">Delete</a>
                     </td>
                 </tr>
             }
