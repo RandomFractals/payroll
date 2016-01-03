@@ -12,7 +12,7 @@ namespace payroll.Models
 
         public int EmployeeID { get; set; }
 
-        [Display(Name = "Salary ($)")]
+        [Display(Name = "Salary ($/year)")]
         [DisplayFormat(DataFormatString = "{0:C}")]
         [Required]
         [Range(10000, 1000000000)]
@@ -22,7 +22,7 @@ namespace payroll.Models
         [Display(Name = "Dependents")]
         public ICollection<Dependent> Dependents { get; set; }
 
-        [Display(Name = "Deductions")]
+        [Display(Name = "Deductions/year")]
         [DisplayFormat(DataFormatString = "{0:C}")]
         //[NotMapped] - not in ef7 yet
         public virtual decimal Deductions
