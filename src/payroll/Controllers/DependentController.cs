@@ -54,14 +54,50 @@ namespace payroll.Controllers
         public async Task<ActionResult> EditDependent(int id)
         {
             Dependent dependent = await GetDependentAsync(id);
+            if (dependent == null)
+            {
+                return HttpNotFound();
+            }
+            return View(dependent);
+        }
 
+
+        [HttpGet]
+        [ActionName("DeleteDependent")]
+        public async Task<ActionResult> ConfirmDelete(int id, bool? retry)
+        {
+            Dependent dependent = await GetDependentAsync(id);
             if (dependent == null)
             {
                 return HttpNotFound();
             }
 
+            ViewBag.Retry = retry ?? false;
+
             return View(dependent);
         }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> DeleteDependent(int id)
+        {
+            int employeeId;
+            try
+            {
+                Dependent dependent = await GetDependentAsync(id);
+                employeeId = dependent.Employee.EmployeeID;
+                EmployeeDataContext.Dependents.Remove(dependent);
+                await EmployeeDataContext.SaveChangesAsync();
+            }
+            catch (DbUpdateException)
+            {
+                return RedirectToAction("DeleteDependent", new { id = id, retry = true });
+            }
+
+            return RedirectToAction("Dependents", "Employee", new { id = employeeId });
+        }
+
 
         private Task<Dependent> GetDependentAsync(int id)
         {
