@@ -1,0 +1,19 @@
+﻿{
+  "ApplicationInsights": {
+    "InstrumentationKey": ""
+  },
+  "AppSettings": {
+    "SiteTitle": "XYZ Payroll"
+  },
+  "Data": {
+    "ConnectionString": "Server=(localdb)\\MSSQLLocalDB;Database=payroll;Trusted_Connection=True;MultipleActiveResultSets=true"
+  },
+  "Logging": {
+    "IncludeScopes": false,
+    "LogLevel": {
+      "Default": "Verbose",
+      "System": "Information",
+      "Microsoft": "Information"
+    }
+  }
+}
