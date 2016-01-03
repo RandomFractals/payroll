@@ -28,7 +28,7 @@
                         @Html.DisplayFor(modelItem => item.Salary)
                     </td>
                     <td>
-                        <a asp-action="EmployeeInfo" asp-route-id="@item.EmployeeID">@item.Dependents.Count</a>
+                        <a asp-action="Dependents" asp-route-id="@item.EmployeeID">@item.Dependents.Count</a>
                     </td>
                     <td>
                         <!-- todo: add deductions amount display  -->
