@@ -1,7 +1,17 @@
-﻿@model payroll.Models.Dependent
+﻿@using payroll.Models
+@model payroll.Models.Dependent
 @{
     ViewBag.Title = "Add Dependent";
 }
+<ol class="breadcrumb">
+    <li><a asp-controller="Employee" asp-action="Index">Employees</a></li>
+    <li>
+        <a asp-controller="Employee" asp-action="EditEmployee" 
+           asp-route-id="@ViewBag.EmployeeID">
+            @ViewBag.EmployeeName
+        </a>
+    </li>
+</ol>
 <form asp-controller="Dependent" asp-action="SaveDependent" method="post">
     <div class="panel panel-primary">
         <div class="panel-heading">
@@ -21,13 +31,14 @@
             </div>
             <div class="form-group">
                 <label asp-for="Relationship"></label>
-                <input asp-for="Relationship" class="form-control" placeholder="Relationship" />
+                <select asp-for="Relationship" class="form-control"
+                        asp-items="Html.GetEnumSelectList<Relationship>()"></select>
             </div>
         </div>
         <div class="panel-footer">
             <input type="submit" class="btn btn-primary" value="Add" />
             <a asp-controller="Employee" asp-action="Dependents" 
-               asp-route-id="@ViewContext.RouteData.Values["id"]">Cancel</a>
+               asp-route-id="@ViewBag.EmployeeID">Cancel</a>
         </div>
     </div>
 </form>

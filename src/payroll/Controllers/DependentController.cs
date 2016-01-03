@@ -32,13 +32,33 @@ namespace payroll.Controllers
             return View(employee);
         }
 
-
-        public async Task<ActionResult> AddDependent(int employeeId)
+        /*
+        public IActionResult AddDependent(int employeeId)
         {
-            ViewData["EmployeeID"] = employeeId;
-            Employee employee = await EmployeeDataContext.Employees
-                .SingleOrDefaultAsync(e => e.EmployeeID == employeeId);
-            return View(employee);
+            Employee employee = EmployeeDataContext.Employees
+                .SingleOrDefault(e => e.EmployeeID == employeeId);
+
+            ViewBag.Employee = employee;
+
+            return View();
+        }*/
+
+        public async Task<ActionResult> AddDependent(int id)
+        {
+            Employee employee = await //Task.WhenAll(
+                EmployeeDataContext.Employees
+                .SingleOrDefaultAsync(e => e.EmployeeID == id);
+                //);
+
+            if (employee == null)
+            {
+                return HttpNotFound();
+            }
+
+            ViewBag.EmployeeID = employee.EmployeeID;
+            ViewBag.EmployeeName = employee.FirstName + ' ' + employee.LastName;
+
+            return View();
         }
 
 
