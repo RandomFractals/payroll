@@ -10,7 +10,7 @@ namespace payroll.Models
 
         public int EmployeeID { get; set; }
 
-        [Display(Name = "Salary")]
+        [Display(Name = "Salary ($)")]
         [DisplayFormat(DataFormatString = "{0:C}")]
         [Required]
         [Range(10000, 1000000000)]
