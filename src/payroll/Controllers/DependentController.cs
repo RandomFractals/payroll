@@ -51,12 +51,57 @@ namespace payroll.Controllers
         }
 
 
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> SaveDependent(
+            [Bind("FirstName", "LastName", "Relationship")] Dependent dependent)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    EmployeeDataContext.Dependents.Add(dependent);
+                    await EmployeeDataContext.SaveChangesAsync();
+                    return RedirectToAction("Dependents", "Employee",
+                        new { id = dependent.Employee.EmployeeID });
+                }
+            }
+            catch (DbUpdateException)
+            {
+                ModelState.AddModelError(string.Empty, "Could not add new dependent.");
+            }
+
+            return View(dependent);
+        }
+
+
         public async Task<ActionResult> EditDependent(int id)
         {
             Dependent dependent = await GetDependentAsync(id);
             if (dependent == null)
             {
                 return HttpNotFound();
+            }
+            return View(dependent);
+        }
+
+
+        public async Task<ActionResult> UpdateDependent(int id,
+            [Bind("FirstName", "LastName", "Relationship")] Dependent dependent)
+        {
+            try
+            {
+                dependent.DependentID = id;
+                EmployeeDataContext.Dependents.Attach(dependent);
+                EmployeeDataContext.Entry(dependent).State = EntityState.Modified;
+                await EmployeeDataContext.SaveChangesAsync();
+                return RedirectToAction("Dependents", "Employee", 
+                    new { id = dependent.Employee.EmployeeID });
+            }
+            catch (DbUpdateException)
+            {
+                ModelState.AddModelError(string.Empty, "Failed to save dependent info updates.");
             }
             return View(dependent);
         }
