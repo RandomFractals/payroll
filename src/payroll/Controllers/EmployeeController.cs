@@ -26,7 +26,7 @@ namespace payroll.Controllers
         }
 
 
-        public async Task<ActionResult> EmployeeInfo(int id)
+        public async Task<ActionResult> Dependents(int id)
         {
             Employee employee = await EmployeeDataContext.Employees
                 .Include( e => e.Dependents)
