@@ -34,11 +34,8 @@ namespace payroll.Controllers
 
         public async Task<ActionResult> AddDependent(int id)
         {
-            Employee employee = await //Task.WhenAll(
-                EmployeeDataContext.Employees
+            Employee employee = await EmployeeDataContext.Employees
                 .SingleOrDefaultAsync(e => e.EmployeeID == id);
-                //);
-
             if (employee == null)
             {
                 return HttpNotFound();
@@ -55,7 +52,7 @@ namespace payroll.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> SaveDependent(
-            [Bind("FirstName", "LastName", "Relationship")] Dependent dependent)
+            [Bind("FirstName", "LastName", "Relationship", "EmployeeID")] Dependent dependent)
         {
             try
             {
@@ -63,8 +60,9 @@ namespace payroll.Controllers
                 {
                     EmployeeDataContext.Dependents.Add(dependent);
                     await EmployeeDataContext.SaveChangesAsync();
+
                     return RedirectToAction("Dependents", "Employee",
-                        new { id = dependent.Employee.EmployeeID });
+                        new { id = dependent.EmployeeID });
                 }
             }
             catch (DbUpdateException)
@@ -147,7 +145,6 @@ namespace payroll.Controllers
         private Task<Dependent> GetDependentAsync(int id)
         {
             return EmployeeDataContext.Dependents
-                //.SingleOrDefaultAsync(d => d.DependentID == id);
                 .Include(e => e.Employee)
                 .SingleOrDefaultAsync(d => d.DependentID == id);
 
