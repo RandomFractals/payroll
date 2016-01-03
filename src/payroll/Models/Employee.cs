@@ -10,7 +10,7 @@ namespace payroll.Models
         [Display(Name = "Salary")]
         [DisplayFormat(DataFormatString = "{0:C}")]
         [Required]
-        [Range(1, 1000000000)]
+        [Range(10000, 1000000000)]
         public decimal Salary { get; set;  }
 
         // dependents list navigation property
