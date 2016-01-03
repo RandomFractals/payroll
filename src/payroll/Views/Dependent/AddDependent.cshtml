@@ -15,7 +15,8 @@
 <form asp-controller="Dependent" asp-action="SaveDependent" method="post">
     <div class="panel panel-primary">
         <div class="panel-heading">
-            <h3 class="panel-title">@ViewData["Title"]</h3>
+            <h3 class="panel-title">@ViewBag.Title</h3>
+            <input asp-for="EmployeeID" type="hidden" value="@ViewBag.EmployeeID" />
         </div>
         <div class="panel-body">
             <div asp-validation-summary="ValidationSummary.ModelOnly" class="text-danger"></div>
