@@ -1,4 +1,5 @@
-﻿@model payroll.Models.Employee
+﻿@using payroll.Models
+@model payroll.Models.Employee
 @{
     ViewBag.Title = "Add Employee";
 }
@@ -21,7 +22,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Salary"></label>
-                <input asp-for="Salary" class="form-control" placeholder="Salary" />
+                <input asp-for="Salary" class="form-control" placeholder="@Employee.DefaultSalary" />
                 <span asp-validation-for="Salary" class="text-danger"></span>
             </div>
         </div>

@@ -5,6 +5,9 @@ namespace payroll.Models
 {
     public class Employee : Person
     {
+        // default salary to: 2000/check * 26 checks/year
+        public static decimal DefaultSalary = 2000 * 26;
+
         public int EmployeeID { get; set; }
 
         [Display(Name = "Salary")]
@@ -19,8 +22,8 @@ namespace payroll.Models
 
         public Employee()
         {
-            // default salary to: 2000/check * 26 checks/year
-            Salary = 2000 * 26;
+
+            Salary = DefaultSalary;
         }
     }
 }
