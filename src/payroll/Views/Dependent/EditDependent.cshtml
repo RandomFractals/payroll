@@ -16,6 +16,7 @@
     <div class="panel panel-primary">
         <div class="panel-heading">
             <h3 class="panel-title">@ViewBag.Title</h3>
+            <input asp-for="EmployeeID" type="hidden" value="@Model.EmployeeID" />
         </div>
         <div class="panel-body">
             <div asp-validation-summary="ValidationSummary.ModelOnly" class="text-danger"></div>

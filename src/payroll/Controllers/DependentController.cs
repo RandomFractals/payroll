@@ -86,7 +86,7 @@ namespace payroll.Controllers
 
 
         public async Task<ActionResult> UpdateDependent(int id,
-            [Bind("FirstName", "LastName", "Relationship")] Dependent dependent)
+            [Bind("FirstName", "LastName", "Relationship", "EmployeeID")] Dependent dependent)
         {
             try
             {
@@ -95,7 +95,7 @@ namespace payroll.Controllers
                 EmployeeDataContext.Entry(dependent).State = EntityState.Modified;
                 await EmployeeDataContext.SaveChangesAsync();
                 return RedirectToAction("Dependents", "Employee", 
-                    new { id = dependent.Employee.EmployeeID });
+                    new { id = dependent.EmployeeID });
             }
             catch (DbUpdateException)
             {

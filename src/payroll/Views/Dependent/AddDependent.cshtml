@@ -7,9 +7,7 @@
     <li><a asp-controller="Employee" asp-action="Index">Employees</a></li>
     <li>
         <a asp-controller="Employee" asp-action="EditEmployee" 
-           asp-route-id="@ViewBag.EmployeeID">
-            @ViewBag.EmployeeName
-        </a>
+           asp-route-id="@ViewBag.EmployeeID">@ViewBag.EmployeeName</a>
     </li>
 </ol>
 <form asp-controller="Dependent" asp-action="SaveDependent" method="post">
