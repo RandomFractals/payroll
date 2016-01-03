@@ -16,5 +16,11 @@ namespace payroll.Models
 
         [Display(Name = "Dependents")]
         public ICollection<Dependent> Dependents { get; set; }
+
+        public Employee()
+        {
+            // default salary to: 2000/check * 26 checks/year
+            Salary = 2000 * 26;
+        }
     }
 }
