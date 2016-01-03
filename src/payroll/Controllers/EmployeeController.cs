@@ -50,7 +50,7 @@ namespace payroll.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> SaveEmployee(
-            [Bind("FirstName", "LastName", "Salary")] Employee employee)
+            [Bind("FirstName", "LastName", "Salary", "Deductions")] Employee employee)
         {
             try
             {

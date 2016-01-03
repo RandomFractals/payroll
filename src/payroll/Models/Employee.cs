@@ -36,14 +36,17 @@ namespace payroll.Models
                     _deductions *= .9m; // 10% discount
                 }
 
-                foreach(Dependent dependent in Dependents)
+                if (Dependents != null)
                 {
-                    decimal dependentDeduction = DeductionPerDependent;
-                    if ( dependent.FirstName.StartsWith("A") )
+                    foreach (Dependent dependent in Dependents)
                     {
-                        dependentDeduction *= .9m; // 10% discount
+                        decimal dependentDeduction = DeductionPerDependent;
+                        if (dependent.FirstName.StartsWith("A"))
+                        {
+                            dependentDeduction *= .9m; // 10% discount
+                        }
+                        _deductions += dependentDeduction;
                     }
-                    _deductions += dependentDeduction;
                 }
                 return _deductions;
             }
