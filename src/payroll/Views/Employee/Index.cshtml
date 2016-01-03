@@ -31,7 +31,7 @@
                         <a asp-action="Dependents" asp-route-id="@item.EmployeeID">@item.Dependents.Count</a>
                     </td>
                     <td>
-                        <!-- todo: add deductions amount display  -->
+                        @Html.DisplayFor(modelItem => item.Deductions)
                     </td>
                     <td>
                         <a asp-action="DeleteEmployee" asp-route-id="@item.EmployeeID">Delete</a>
