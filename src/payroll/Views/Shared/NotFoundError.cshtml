@@ -1,6 +1,11 @@
 ﻿@{
     ViewData["Title"] = "Not Found Error";
 }
-
-<h1 class="text-danger">Not Found Error</h1>
-<h2 class="text-danger">Requested resource could not be located</h2>
+<div class="panel panel-danger">
+    <div class="panel-heading">
+        <h3 class="panel-title">@ViewData["Title"]</h3>
+    </div>
+    <div class="panel-body">
+        <p class="text-danger">Requested resource could not be located.</p>
+    </div>
+</div>
