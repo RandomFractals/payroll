@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
+using payroll.Data;
 using payroll.Models;
 
 namespace payroll
@@ -44,7 +45,11 @@ namespace payroll
                 {
                     options.UseSqlServer(Configuration["Data:ConnectionString"]);
                 });
+
+            // add new employee repo for DI
+            services.AddScoped<IEmployeeRepository, EmployeeRepository>();
         }
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
@@ -79,6 +84,7 @@ namespace payroll
 
             //SampleData.Initialize(app.ApplicationServices);
         }
+
 
         // Entry point for the application.
         public static void Main(string[] args) => WebApplication.Run<Startup>(args);
