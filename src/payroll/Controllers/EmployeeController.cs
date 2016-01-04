@@ -21,7 +21,8 @@ namespace payroll.Controllers
         public IActionResult Index()
         {
             var employees = EmployeeDataContext.Employees
-                .Include(e => e.Dependents);
+                .Include(e => e.Dependents).ToList();
+            employees = employees.OrderBy(e => e.LastName).ToList();
             return View(employees);
         }
 
