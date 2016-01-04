@@ -18,7 +18,7 @@ namespace payroll.Controllers
 
 
         // GET: /<controller>/
-        public IActionResult Index(string sortOrder)
+        public IActionResult Index(string sortOrder, string searchString)
         {
             // get employees
             var employees = EmployeeDataContext.Employees
@@ -28,6 +28,12 @@ namespace payroll.Controllers
             ViewBag.NameSortOrder = String.IsNullOrEmpty(sortOrder) ? "NameDesc" : "";
             ViewBag.SalarySortOrder = (sortOrder == "Salary" ? "SalaryDesc" : "Salary");
             ViewBag.DeductionsSortOrder = (sortOrder == "Deductions" ? "DeductionsDesc" : "Deductions");
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                // filter by list name
+                employees = employees.Where(e => e.LastName.Contains(searchString)).ToList();
+            }
 
             // sort employees for list view
             switch (sortOrder)

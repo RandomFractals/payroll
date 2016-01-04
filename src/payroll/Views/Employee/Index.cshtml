@@ -7,6 +7,14 @@
         <h3 class="panel-title">@ViewData["Title"]</h3>
     </div>
     <div class="panel-body">
+        @using (Html.BeginForm())
+        {
+            <div class="well well-sm">
+                @Html.TextBox("SearchString")
+                <input type="submit" class="btn-primary" value="Search" />
+            </div>
+
+        }
         <table class="table">
             <tr>
                 <th>@Html.ActionLink("Name", "Index", new { sortOrder = ViewBag.NameSortOrder })</th>
