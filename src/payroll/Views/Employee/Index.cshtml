@@ -9,8 +9,9 @@
     <div class="panel-body">
         <table class="table">
             <tr>
-                <th>Name</th>
-                <th>@Html.DisplayNameFor(model => model.Salary)</th>
+                <th>@Html.ActionLink("Name", "Index", new { sortOrder = ViewBag.NameSortOrder })</th>
+                <th>@Html.ActionLink(Html.DisplayNameFor(model => model.Salary),
+                        "Index", new { sortOrder = ViewBag.SalarySortOrder })</th>
                 <th>@Html.DisplayNameFor(model => model.Dependents)</th>
                 <th>@Html.DisplayNameFor(model => model.Deductions)</th>
                 <th>Actions</th>

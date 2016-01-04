@@ -18,11 +18,34 @@ namespace payroll.Controllers
 
 
         // GET: /<controller>/
-        public IActionResult Index()
+        public IActionResult Index(string sortOrder)
         {
+            // get employees
             var employees = EmployeeDataContext.Employees
                 .Include(e => e.Dependents).ToList();
-            employees = employees.OrderBy(e => e.LastName).ToList();
+
+            // init list view sort order
+            ViewBag.NameSortOrder = String.IsNullOrEmpty(sortOrder) ? "NameDesc" : "";
+            ViewBag.SalarySortOrder = (sortOrder == "Salary" ? "SalaryDesc" : "Salary");
+
+            // sort employees for list view
+            switch (sortOrder)
+            {
+                case "Salary":
+                    employees = employees.OrderBy(e => e.Salary).ToList();
+                    break;
+                case "SalaryDesc":
+                    employees = employees.OrderByDescending(e => e.Salary).ToList();
+                    break;
+                case "NameDesc":
+                    employees = employees.OrderByDescending(e => e.LastName).ToList();
+                    break;
+                default:
+                    employees = employees.OrderBy(e => e.LastName).ToList();
+                    break;
+            }
+
+
             return View(employees);
         }
 
