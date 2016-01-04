@@ -9,14 +9,14 @@ namespace payroll.Data
 {
     interface IEmployeeRepository
     {
-        Task<IEnumerable<Employee>> GetEmployees();
-
         Task<bool> AddEmployeeAsync(Employee newEmployee);
+
+        Task<bool> DeleteEmployeeAsync(int id);
+
+        Task<Employee> GetEmployeeAsync(int id);
 
         Task<bool> UpdateEmployeeAsync(Employee employee);
 
-        Task<Employee> GetEmployeeByIdAsync(int id);
-
-        Task<bool> DeleteEmployeeAsync(int id);
+        Task<IEnumerable<Employee>> GetAllEmployees();
     }
 }
