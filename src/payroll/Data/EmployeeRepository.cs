@@ -10,26 +10,49 @@ namespace payroll.Data
 {
     public class EmployeeRepository : IEmployeeRepository
     {
-        public Task<bool> AddEmployeeAsync(Employee newEmployee)
-        {
-            throw new NotImplementedException();
-        }
 
-        public Task<bool> DeleteEmployeeAsync(int id)
+        private EmployeeDataContext _context;
+        public EmployeeRepository(EmployeeDataContext context)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<Employee> GetEmployeeAsync(int id)
-        {
-            throw new NotImplementedException();
+            _context = context;
         }
 
 
-        public Task<bool> UpdateEmployeeAsync(Employee employee)
+        public async Task<bool> AddEmployeeAsync(Employee newEmployee)
         {
-            throw new NotImplementedException();
+            _context.Employees.Add(newEmployee);
+
+            return (await _context.SaveChangesAsync() > 0);
         }
+
+
+        public async Task<bool> DeleteEmployeeAsync(int id)
+        {
+            var employee = GetEmployeeAsync(id);
+
+            if (employee == null) return false;
+
+           // _context.Employees.Remove(employee);
+
+            return (await _context.SaveChangesAsync() > 0);
+        }
+
+
+        public async Task<Employee> GetEmployeeAsync(int id)
+        {
+            return await _context.Employees
+                .Include(e => e.Dependents)
+                .SingleOrDefaultAsync(e => e.EmployeeID == id);
+        }
+
+
+        public async Task<bool> UpdateEmployeeAsync(Employee employee)
+        {
+            _context.Employees.Update(employee);
+
+            return (await _context.SaveChangesAsync() > 0);
+        }
+
 
         public Task<IEnumerable<Employee>> GetAllEmployees()
         {
