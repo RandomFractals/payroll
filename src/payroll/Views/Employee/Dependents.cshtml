@@ -38,7 +38,9 @@
                     </td>
                     <td>
                         <a asp-controller="Dependent" asp-action="DeleteDependent" 
-                           asp-route-id="@item.DependentID">Delete</a>
+                           asp-route-id="@item.DependentID">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </a>
                     </td>
                 </tr>
             }
