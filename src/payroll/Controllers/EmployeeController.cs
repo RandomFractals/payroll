@@ -21,8 +21,9 @@ namespace payroll.Controllers
         public IActionResult Index(string sortOrder, string searchString)
         {
             // get employees
+            // TODO: add pagination with Skip(PageIndex*ItemsPerPage) and Take(ItermsPerPage)
             var employees = EmployeeDataContext.Employees
-                .Include(e => e.Dependents).ToList();
+                .Include(e => e.Dependents).ToList(); 
 
             // init list view sort order
             ViewBag.NameSortOrder = String.IsNullOrEmpty(sortOrder) ? "NameDesc" : "";
