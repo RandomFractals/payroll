@@ -31,5 +31,10 @@ namespace payroll.Controllers
         {
             return View();
         }
+
+        public IActionResult NotFoundError()
+        {
+            return View();
+        }
     }
 }

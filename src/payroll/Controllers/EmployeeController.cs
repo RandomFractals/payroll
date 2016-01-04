@@ -71,7 +71,7 @@ namespace payroll.Controllers
 
             if (employee == null)
             {
-                return HttpNotFound();
+                return View("NotFoundError");
             }
 
             return View(employee);
@@ -113,7 +113,7 @@ namespace payroll.Controllers
 
             if (employee == null)
             {
-                return HttpNotFound();
+                return View("NotFoundError");
             }
 
             return View(employee);
@@ -146,7 +146,7 @@ namespace payroll.Controllers
             Employee employee = await GetEmployeeAsync(id);
             if (employee == null)
             {
-                return HttpNotFound();
+                return View("NotFoundError");
             }
 
             ViewBag.Retry = retry ?? false;

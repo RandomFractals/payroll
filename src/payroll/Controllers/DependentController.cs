@@ -25,7 +25,7 @@ namespace payroll.Controllers
 
             if (employee == null)
             {
-                return HttpNotFound();
+                return View("NotFoundError");
             }
 
             return View(employee);
@@ -38,7 +38,7 @@ namespace payroll.Controllers
                 .SingleOrDefaultAsync(e => e.EmployeeID == id);
             if (employee == null)
             {
-                return HttpNotFound();
+                return View("NotFoundError");
             }
 
             ViewBag.EmployeeID = employee.EmployeeID;
@@ -79,7 +79,7 @@ namespace payroll.Controllers
             Dependent dependent = await GetDependentAsync(id);
             if (dependent == null)
             {
-                return HttpNotFound();
+                return View("NotFoundError");
             }
             return View(dependent);
         }
@@ -112,7 +112,7 @@ namespace payroll.Controllers
             Dependent dependent = await GetDependentAsync(id);
             if (dependent == null)
             {
-                return HttpNotFound();
+                return View("NotFoundError");
             }
 
             ViewBag.Retry = retry ?? false;
