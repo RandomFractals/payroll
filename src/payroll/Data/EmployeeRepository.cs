@@ -28,11 +28,11 @@ namespace payroll.Data
 
         public async Task<bool> DeleteEmployeeAsync(int id)
         {
-            var employee = GetEmployeeAsync(id);
+            var employee = await GetEmployeeAsync(id);
 
             if (employee == null) return false;
 
-           // _context.Employees.Remove(employee);
+            _context.Employees.Remove(employee);
 
             return (await _context.SaveChangesAsync() > 0);
         }
