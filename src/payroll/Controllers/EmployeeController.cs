@@ -27,6 +27,7 @@ namespace payroll.Controllers
             // init list view sort order
             ViewBag.NameSortOrder = String.IsNullOrEmpty(sortOrder) ? "NameDesc" : "";
             ViewBag.SalarySortOrder = (sortOrder == "Salary" ? "SalaryDesc" : "Salary");
+            ViewBag.DeductionsSortOrder = (sortOrder == "Deductions" ? "DeductionsDesc" : "Deductions");
 
             // sort employees for list view
             switch (sortOrder)
@@ -36,6 +37,12 @@ namespace payroll.Controllers
                     break;
                 case "SalaryDesc":
                     employees = employees.OrderByDescending(e => e.Salary).ToList();
+                    break;
+                case "Deductions":
+                    employees = employees.OrderBy(e => e.Deductions).ToList();
+                    break;
+                case "DeductionsDesc":
+                    employees = employees.OrderByDescending(e => e.Deductions).ToList();
                     break;
                 case "NameDesc":
                     employees = employees.OrderByDescending(e => e.LastName).ToList();

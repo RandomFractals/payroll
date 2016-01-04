@@ -22,7 +22,7 @@ namespace payroll.Models
         [Display(Name = "Dependents")]
         public ICollection<Dependent> Dependents { get; set; }
 
-        [Display(Name = "Deductions/year")]
+        [Display(Name = "Deductions ($/year)")]
         [DisplayFormat(DataFormatString = "{0:C}")]
         //[NotMapped] - not in ef7 yet
         public virtual decimal Deductions
