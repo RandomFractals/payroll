@@ -54,9 +54,10 @@ namespace payroll.Data
         }
 
 
-        public Task<IEnumerable<Employee>> GetAllEmployees()
+        public async Task<IEnumerable<Employee>> GetAllEmployees(string nameSearchString)
         {
-            throw new NotImplementedException();
+            return await _context.Employees
+                .Include(e => e.Dependents).ToListAsync();
         }
     }
 }
