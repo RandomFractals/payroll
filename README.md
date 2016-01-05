@@ -12,3 +12,5 @@ Other assumptions for simplicity:
     - There are 26 paychecks in a year
 
 
+![Alt text](https://github.com/RandomFractals/payroll/blob/master/screens/XYZPayrollV2.png?raw=true 
+ "Employee List Screenshot")
