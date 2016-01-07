@@ -6,41 +6,41 @@ using Microsoft.Data.Entity.Storage;
 
 namespace payroll.Models
 {
-    public static class SampleData
-    {
+	public static class SampleData
+	{
 		public static void Initialize(IServiceProvider serviceProvider)
 		{
 
-            var context = serviceProvider.GetService<EmployeeDataContext>();
+			var context = serviceProvider.GetService<EmployeeDataContext>();
 
-			if ( serviceProvider.GetService<IRelationalDatabaseCreator>().Exists() )
+			if (serviceProvider.GetService<IRelationalDatabaseCreator>().Exists())
 			{
 
-                if (!context.Employees.Any())
-                {
-                    var janeDoe = context.Employees.Add(
-                    new Employee { FirstName = "Jane", LastName = "Doe", Salary = 52000 }).Entity;
+				if (!context.Employees.Any())
+				{
+					var janeDoe = context.Employees.Add(
+					new Employee { FirstName = "Jane", LastName = "Doe", Salary = 52000 }).Entity;
 
-                    context.Dependents.AddRange(
-                        new Dependent()
-                        {
-                            FirstName = "Jon",
-                            LastName = "Don",
-                            Employee = janeDoe,
-                            Relationship = Relationship.Spouse
-                        },
-                        new Dependent()
-                        {
-                            FirstName = "Sally",
-                            MiddleName = "Madison",
-                            LastName = "Don-Doe",
-                            Relationship = Relationship.Daughter
-                        }
-                    );
+					context.Dependents.AddRange(
+							new Dependent()
+							{
+								FirstName = "Jon",
+								LastName = "Don",
+								Employee = janeDoe,
+								Relationship = Relationship.Spouse
+							},
+							new Dependent()
+							{
+								FirstName = "Sally",
+								MiddleName = "Madison",
+								LastName = "Don-Doe",
+								Relationship = Relationship.Daughter
+							}
+					);
 
-                    context.SaveChanges();
-                }					
+					context.SaveChanges();
+				}
 			}
 		}
-    }
+	}
 }

@@ -6,35 +6,35 @@ using Microsoft.AspNet.Mvc;
 
 namespace payroll.Controllers
 {
-    public class HomeController : Controller
-    {
-        public IActionResult Index()
-        {
-            return View();
-        }
+	public class HomeController : Controller
+	{
+		public IActionResult Index()
+		{
+			return View();
+		}
 
-        public IActionResult About()
-        {
-            ViewData["Message"] = "XYZ Payroll";
+		public IActionResult About()
+		{
+			ViewData["Message"] = "XYZ Payroll";
 
-            return View();
-        }
+			return View();
+		}
 
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Contact us at:";
+		public IActionResult Contact()
+		{
+			ViewData["Message"] = "Contact us at:";
 
-            return View();
-        }
+			return View();
+		}
 
-        public IActionResult Error()
-        {
-            return View();
-        }
+		public IActionResult Error()
+		{
+			return View();
+		}
 
-        public IActionResult NotFoundError()
-        {
-            return View();
-        }
-    }
+		public IActionResult NotFoundError()
+		{
+			return View();
+		}
+	}
 }

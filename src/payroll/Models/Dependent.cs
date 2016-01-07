@@ -2,16 +2,16 @@
 
 namespace payroll.Models
 {
-    public class Dependent: Person
-    {
-        public int DependentID { get; set; }
+	public class Dependent : Person
+	{
+		public int DependentID { get; set; }
 
-        [Display(Name = "Relationship")]
-        public Relationship Relationship { get; set; }
+		[Display(Name = "Relationship")]
+		public Relationship Relationship { get; set; }
 
-        public int EmployeeID { get; set; }
+		public int EmployeeID { get; set; }
 
-        // navigation property
-        public Employee Employee { get; set; }
-    }
+		// navigation property
+		public Employee Employee { get; set; }
+	}
 }

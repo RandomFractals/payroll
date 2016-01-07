@@ -2,20 +2,20 @@
 
 namespace payroll.Models
 {
-    public class EmployeeDataContext: DbContext
-    {
-        public EmployeeDataContext()
-        {
-            Database.EnsureCreated();
-        }
+	public class EmployeeDataContext : DbContext
+	{
+		public EmployeeDataContext()
+		{
+			Database.EnsureCreated();
+		}
 
-        public DbSet<Employee> Employees { get; set;  }
-        public DbSet<Dependent> Dependents { get; set; }
+		public DbSet<Employee> Employees { get; set; }
+		public DbSet<Dependent> Dependents { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Employee>()
-                .Ignore(e => e.Deductions);
-        }
-    }
+		protected override void OnModelCreating(ModelBuilder modelBuilder)
+		{
+			modelBuilder.Entity<Employee>()
+					.Ignore(e => e.Deductions);
+		}
+	}
 }

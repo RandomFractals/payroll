@@ -7,16 +7,16 @@ using payroll.Models;
 
 namespace payroll.Data
 {
-    interface IEmployeeRepository
-    {
-        Task<bool> AddEmployeeAsync(Employee newEmployee);
+	interface IEmployeeRepository
+	{
+		Task<bool> AddEmployeeAsync(Employee newEmployee);
 
-        Task<bool> DeleteEmployeeAsync(int id);
+		Task<bool> DeleteEmployeeAsync(int id);
 
-        Task<Employee> GetEmployeeAsync(int id);
+		Task<Employee> GetEmployeeAsync(int id);
 
-        Task<bool> UpdateEmployeeAsync(Employee employee);
+		Task<bool> UpdateEmployeeAsync(Employee employee);
 
-        Task<IEnumerable<Employee>> GetAllEmployees(string nameSearchString);
-    }
+		Task<IEnumerable<Employee>> GetAllEmployees(string nameSearchString);
+	}
 }

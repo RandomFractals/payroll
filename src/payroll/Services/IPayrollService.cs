@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace payroll.Services
 {
-    interface IPayrollService
-    {
-    }
+	interface IPayrollService
+	{
+	}
 }

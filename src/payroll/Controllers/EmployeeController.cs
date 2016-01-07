@@ -11,175 +11,175 @@ using payroll.Models;
 
 namespace payroll.Controllers
 {
-    public class EmployeeController : Controller
-    {
-        [FromServices]
-        public EmployeeDataContext EmployeeDataContext { get; set; }        
+	public class EmployeeController : Controller
+	{
+		[FromServices]
+		public EmployeeDataContext EmployeeDataContext { get; set; }
 
 
-        // GET: /<controller>/
-        public IActionResult Index(string sortOrder, string searchString)
-        {
-            // get employees
-            // TODO: add pagination with Skip(PageIndex*ItemsPerPage) and Take(ItermsPerPage)
-            var employees = EmployeeDataContext.Employees
-                .Include(e => e.Dependents).ToList(); 
+		// GET: /<controller>/
+		public IActionResult Index(string sortOrder, string searchString)
+		{
+			// get employees
+			// TODO: add pagination with Skip(PageIndex*ItemsPerPage) and Take(ItermsPerPage)
+			var employees = EmployeeDataContext.Employees
+					.Include(e => e.Dependents).ToList();
 
-            // init list view sort order
-            ViewBag.NameSortOrder = String.IsNullOrEmpty(sortOrder) ? "NameDesc" : "";
-            ViewBag.SalarySortOrder = (sortOrder == "Salary" ? "SalaryDesc" : "Salary");
-            ViewBag.DeductionsSortOrder = (sortOrder == "Deductions" ? "DeductionsDesc" : "Deductions");
+			// init list view sort order
+			ViewBag.NameSortOrder = String.IsNullOrEmpty(sortOrder) ? "NameDesc" : "";
+			ViewBag.SalarySortOrder = (sortOrder == "Salary" ? "SalaryDesc" : "Salary");
+			ViewBag.DeductionsSortOrder = (sortOrder == "Deductions" ? "DeductionsDesc" : "Deductions");
 
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                // filter by list name
-                employees = employees.Where(e => e.LastName.Contains(searchString)).ToList();
-            }
+			if (!String.IsNullOrEmpty(searchString))
+			{
+				// filter by list name
+				employees = employees.Where(e => e.LastName.Contains(searchString)).ToList();
+			}
 
-            // sort employees for list view
-            switch (sortOrder)
-            {
-                case "Salary":
-                    employees = employees.OrderBy(e => e.Salary).ToList();
-                    break;
-                case "SalaryDesc":
-                    employees = employees.OrderByDescending(e => e.Salary).ToList();
-                    break;
-                case "Deductions":
-                    employees = employees.OrderBy(e => e.Deductions).ToList();
-                    break;
-                case "DeductionsDesc":
-                    employees = employees.OrderByDescending(e => e.Deductions).ToList();
-                    break;
-                case "NameDesc":
-                    employees = employees.OrderByDescending(e => e.LastName).ToList();
-                    break;
-                default:
-                    employees = employees.OrderBy(e => e.LastName).ToList();
-                    break;
-            }
-
-
-            return View(employees);
-        }
+			// sort employees for list view
+			switch (sortOrder)
+			{
+				case "Salary":
+					employees = employees.OrderBy(e => e.Salary).ToList();
+					break;
+				case "SalaryDesc":
+					employees = employees.OrderByDescending(e => e.Salary).ToList();
+					break;
+				case "Deductions":
+					employees = employees.OrderBy(e => e.Deductions).ToList();
+					break;
+				case "DeductionsDesc":
+					employees = employees.OrderByDescending(e => e.Deductions).ToList();
+					break;
+				case "NameDesc":
+					employees = employees.OrderByDescending(e => e.LastName).ToList();
+					break;
+				default:
+					employees = employees.OrderBy(e => e.LastName).ToList();
+					break;
+			}
 
 
-        public async Task<ActionResult> Dependents(int id)
-        {
-            Employee employee = await EmployeeDataContext.Employees
-                .Include( e => e.Dependents)
-                .SingleOrDefaultAsync(e => e.EmployeeID == id);
-
-            if (employee == null)
-            {
-                return View("NotFoundError");
-            }
-
-            return View(employee);
-        }
+			return View(employees);
+		}
 
 
-        public ActionResult AddEmployee()
-        {
-            return View();
-        }
+		public async Task<ActionResult> Dependents(int id)
+		{
+			Employee employee = await EmployeeDataContext.Employees
+					.Include(e => e.Dependents)
+					.SingleOrDefaultAsync(e => e.EmployeeID == id);
+
+			if (employee == null)
+			{
+				return View("NotFoundError");
+			}
+
+			return View(employee);
+		}
 
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> SaveEmployee(
-            [Bind("FirstName", "LastName", "Salary", "Deductions")] Employee employee)
-        {
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                    EmployeeDataContext.Employees.Add(employee);
-                    await EmployeeDataContext.SaveChangesAsync();
-                    return RedirectToAction("Index");
-                }
-            }
-            catch (DbUpdateException)
-            {
-                ModelState.AddModelError(string.Empty, "Could not create new employee.");
-            }
-
-            return View(employee);
-        }
+		public ActionResult AddEmployee()
+		{
+			return View();
+		}
 
 
-        public async Task<ActionResult> EditEmployee(int id)
-        {
-            Employee employee = await GetEmployeeAsync(id);
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public async Task<ActionResult> SaveEmployee(
+				[Bind("FirstName", "LastName", "Salary", "Deductions")] Employee employee)
+		{
+			try
+			{
+				if (ModelState.IsValid)
+				{
+					EmployeeDataContext.Employees.Add(employee);
+					await EmployeeDataContext.SaveChangesAsync();
+					return RedirectToAction("Index");
+				}
+			}
+			catch (DbUpdateException)
+			{
+				ModelState.AddModelError(string.Empty, "Could not create new employee.");
+			}
 
-            if (employee == null)
-            {
-                return View("NotFoundError");
-            }
-
-            return View(employee);
-        }
-
-
-        public async Task<ActionResult> UpdateEmployee(int id, 
-            [Bind("FirstName", "LastName", "Salary")] Employee employee)
-        {
-            try
-            {
-                employee.EmployeeID = id;
-                EmployeeDataContext.Employees.Attach(employee);
-                EmployeeDataContext.Entry(employee).State = EntityState.Modified;
-                await EmployeeDataContext.SaveChangesAsync();
-                return RedirectToAction("Index");
-            }
-            catch (DbUpdateException)
-            {
-                ModelState.AddModelError(string.Empty, "Failed to save employee info updates.");
-            }
-            return View(employee);
-        }
+			return View(employee);
+		}
 
 
-        [HttpGet]
-        [ActionName("DeleteEmployee")]
-        public async Task<ActionResult> ConfirmDelete(int id, bool? retry)
-        {
-            Employee employee = await GetEmployeeAsync(id);
-            if (employee == null)
-            {
-                return View("NotFoundError");
-            }
+		public async Task<ActionResult> EditEmployee(int id)
+		{
+			Employee employee = await GetEmployeeAsync(id);
 
-            ViewBag.Retry = retry ?? false;
+			if (employee == null)
+			{
+				return View("NotFoundError");
+			}
 
-            return View(employee);
-        }
+			return View(employee);
+		}
 
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteEmployee(int id)
-        {
-            try
-            {
-                Employee employee = await GetEmployeeAsync(id);
-                EmployeeDataContext.Employees.Remove(employee);
-                await EmployeeDataContext.SaveChangesAsync();
-            }
-            catch(DbUpdateException)
-            {
-                return RedirectToAction("DeleteEmployee", new { id = id, retry = true });
-            }
+		public async Task<ActionResult> UpdateEmployee(int id,
+				[Bind("FirstName", "LastName", "Salary")] Employee employee)
+		{
+			try
+			{
+				employee.EmployeeID = id;
+				EmployeeDataContext.Employees.Attach(employee);
+				EmployeeDataContext.Entry(employee).State = EntityState.Modified;
+				await EmployeeDataContext.SaveChangesAsync();
+				return RedirectToAction("Index");
+			}
+			catch (DbUpdateException)
+			{
+				ModelState.AddModelError(string.Empty, "Failed to save employee info updates.");
+			}
+			return View(employee);
+		}
 
-            return RedirectToAction("Index");
-        }
+
+		[HttpGet]
+		[ActionName("DeleteEmployee")]
+		public async Task<ActionResult> ConfirmDelete(int id, bool? retry)
+		{
+			Employee employee = await GetEmployeeAsync(id);
+			if (employee == null)
+			{
+				return View("NotFoundError");
+			}
+
+			ViewBag.Retry = retry ?? false;
+
+			return View(employee);
+		}
 
 
-        private Task<Employee> GetEmployeeAsync(int id)
-        {
-            return EmployeeDataContext.Employees
-                .Include(e => e.Dependents)
-                .SingleOrDefaultAsync(e => e.EmployeeID == id);
-        }
-    }
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public async Task<ActionResult> DeleteEmployee(int id)
+		{
+			try
+			{
+				Employee employee = await GetEmployeeAsync(id);
+				EmployeeDataContext.Employees.Remove(employee);
+				await EmployeeDataContext.SaveChangesAsync();
+			}
+			catch (DbUpdateException)
+			{
+				return RedirectToAction("DeleteEmployee", new { id = id, retry = true });
+			}
+
+			return RedirectToAction("Index");
+		}
+
+
+		private Task<Employee> GetEmployeeAsync(int id)
+		{
+			return EmployeeDataContext.Employees
+					.Include(e => e.Dependents)
+					.SingleOrDefaultAsync(e => e.EmployeeID == id);
+		}
+	}
 }
