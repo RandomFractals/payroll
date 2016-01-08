@@ -47,7 +47,7 @@ namespace payroll
 					});
 
 			// add new employee repo for DI
-			services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+			services.AddScoped<EmployeeRepository>();
 		}
 
 

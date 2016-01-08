@@ -1,29 +1,33 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 using Microsoft.AspNet.Mvc;
 using Microsoft.Data.Entity;
-using Microsoft.Extensions.Logging;
 
 using payroll.Models;
+using payroll.Data;
 
 namespace payroll.Controllers
 {
 	public class EmployeeController : Controller
 	{
+
+		[FromServices]
+		public EmployeeRepository EmployeeRepository { get; set; }
+
+
 		[FromServices]
 		public EmployeeDataContext EmployeeDataContext { get; set; }
 
-
 		// GET: /<controller>/
-		public IActionResult Index(string sortOrder, string searchString)
+		public async Task<ActionResult> Index(string sortOrder, string searchString)
 		{
 			// get employees
 			// TODO: add pagination with Skip(PageIndex*ItemsPerPage) and Take(ItermsPerPage)
-			var employees = EmployeeDataContext.Employees
-					.Include(e => e.Dependents).ToList();
+			var employees = //EmployeeDataContext.Employees
+				await EmployeeRepository.GetEmployeesAsync();
+					//.Include(e => e.Dependents).ToList();
 
 			// init list view sort order
 			ViewBag.NameSortOrder = String.IsNullOrEmpty(sortOrder) ? "NameDesc" : "";
