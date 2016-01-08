@@ -1,60 +1,62 @@
 ﻿@model IEnumerable<payroll.Models.Employee>
-@{ 
-    ViewBag.Title = "Employees";
+@{
+	ViewBag.Title = "Employees";
 }
 <div class="panel panel-primary">
-    <div class="panel-heading">
-        <h3 class="panel-title">@ViewData["Title"]</h3>
-    </div>
-    <div class="panel-body">
-        @using (Html.BeginForm())
-        {
-            <div class="well well-sm">
-                @Html.TextBox("SearchString")
-                <input type="submit" class="btn-primary" value="Search" />
-            </div>
+	<div class="panel-heading">
+		<h3 class="panel-title">@ViewData["Title"]</h3>
+	</div>
+	<div class="panel-body">
+		@using (Html.BeginForm())
+		{
+			<div class="well well-sm">
+				@Html.TextBox("SearchString")
+				<input type="submit" class="btn-primary" value="Search" />
+			</div>
 
-        }
-        <table class="table">
-            <tr>
-                <th>@Html.ActionLink("Name", "Index", new { sortOrder = ViewBag.NameSortOrder })</th>
-                <th>@Html.ActionLink(Html.DisplayNameFor(model => model.Salary),
-                        "Index", new { sortOrder = ViewBag.SalarySortOrder })</th>
-                <th>@Html.DisplayNameFor(model => model.Dependents)</th>
-                <th>
-                    @Html.ActionLink(Html.DisplayNameFor(model => model.Deductions),
-                        "Index", new { sortOrder = ViewBag.DeductionsSortOrder })
-            </th>
-                <th></th>
-            </tr>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        <a asp-action="EditEmployee" asp-route-id="@item.EmployeeID">
-                            @Html.DisplayFor(modelItem => item.FirstName)
-                            @Html.DisplayFor(modelItem => item.LastName)
-                        </a>
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Salary)
-                    </td>
-                    <td>
-                        <a asp-action="Dependents" asp-route-id="@item.EmployeeID">@item.Dependents.Count</a>
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Deductions)
-                    </td>
-                    <td>
-                        <a asp-action="DeleteEmployee" asp-route-id="@item.EmployeeID">
-                            x
-                        </a>
-                    </td>
-                </tr>
-            }
-        </table>
-    </div>
-    <div class="panel-footer">
-        <a asp-action="AddEmployee">Add Employee</a>
-    </div>
+		}
+		<table class="table">
+			<tr>
+				<th>@Html.ActionLink("Name", "Index", new { sortOrder = ViewBag.NameSortOrder })</th>
+				<th>
+					@Html.ActionLink(Html.DisplayNameFor(model => model.Salary),
+												"Index", new { sortOrder = ViewBag.SalarySortOrder })
+			</th>
+			<th>@Html.DisplayNameFor(model => model.Dependents)</th>
+			<th>
+				@Html.ActionLink(Html.DisplayNameFor(model => model.Deductions),
+												"Index", new { sortOrder = ViewBag.DeductionsSortOrder })
+			</th>
+			<th></th>
+		</tr>
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>
+					<a asp-action="EditEmployee" asp-route-id="@item.EmployeeID">
+						@Html.DisplayFor(modelItem => item.FirstName)
+						@Html.DisplayFor(modelItem => item.LastName)
+					</a>
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Salary)
+				</td>
+				<td>
+					<a asp-action="Dependents" asp-route-id="@item.EmployeeID">@item.Dependents.Count</a>
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Deductions)
+				</td>
+				<td>
+					<a asp-action="DeleteEmployee" asp-route-id="@item.EmployeeID">
+						x
+					</a>
+				</td>
+			</tr>
+		}
+	</table>
+</div>
+<div class="panel-footer">
+	<a asp-action="AddEmployee">Add Employee</a>
+</div>
 </div>

@@ -1,49 +1,51 @@
 ﻿@using payroll.Models
 @model payroll.Models.Dependent
 @{
-    ViewBag.Title = "Update Dependent";
+	ViewBag.Title = "Update Dependent";
 }
 <ol class="breadcrumb">
-    <li><a asp-controller="Employee" asp-action="Index">Employees</a></li>
-    <li>
-        <a asp-controller="Employee" asp-action="EditEmployee"
-           asp-route-id="@Model.Employee.EmployeeID">
-            @Model.Employee.FirstName @Model.Employee.LastName
-        </a>
-    </li>
+	<li>
+		<a asp-controller="Employee" asp-action="Index">Employees</a>
+	</li>
+	<li>
+		<a asp-controller="Employee" asp-action="EditEmployee"
+			 asp-route-id="@Model.Employee.EmployeeID">
+			@Model.Employee.FirstName @Model.Employee.LastName
+		</a>
+	</li>
 </ol>
 <form asp-controller="Dependent" asp-action="UpdateDependent" method="post" asp-route-id="@Model.DependentID">
-    <div class="panel panel-primary">
-        <div class="panel-heading">
-            <h3 class="panel-title">@ViewBag.Title</h3>
-            <input asp-for="EmployeeID" type="hidden" value="@Model.EmployeeID" />
-        </div>
-        <div class="panel-body">
-            <div asp-validation-summary="ValidationSummary.ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="FirstName"></label>
-                <input asp-for="FirstName" class="form-control" placeholder="First Name" />
-                <span asp-validation-for="FirstName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="LastName"></label>
-                <input asp-for="LastName" class="form-control" placeholder="Last Name" />
-                <span asp-validation-for="LastName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Relationship"></label>
-                <select asp-for="Relationship" class="form-control"
-                        asp-items="Html.GetEnumSelectList<Relationship>()"></select>
-            </div>
-        </div>
-        <div class="panel-footer">
-            <input type="submit" class="btn btn-primary" value="Save" />
-            <a asp-controller="Employee" asp-action="Dependents"
-               asp-route-id="@Model.Employee.EmployeeID">Cancel</a>
-        </div>
-    </div>
+	<div class="panel panel-primary">
+		<div class="panel-heading">
+			<h3 class="panel-title">@ViewBag.Title</h3>
+			<input asp-for="EmployeeID" type="hidden" value="@Model.EmployeeID" />
+		</div>
+		<div class="panel-body">
+			<div asp-validation-summary="ValidationSummary.ModelOnly" class="text-danger"></div>
+			<div class="form-group">
+				<label asp-for="FirstName"></label>
+				<input asp-for="FirstName" class="form-control" placeholder="First Name" />
+				<span asp-validation-for="FirstName" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="LastName"></label>
+				<input asp-for="LastName" class="form-control" placeholder="Last Name" />
+				<span asp-validation-for="LastName" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="Relationship"></label>
+				<select asp-for="Relationship" class="form-control"
+								asp-items="Html.GetEnumSelectList<Relationship>()"></select>
+			</div>
+		</div>
+		<div class="panel-footer">
+			<input type="submit" class="btn btn-primary" value="Save" />
+			<a asp-controller="Employee" asp-action="Dependents"
+				 asp-route-id="@Model.Employee.EmployeeID">Cancel</a>
+		</div>
+	</div>
 </form>
 @section Scripts {
-    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
-    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+	<script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+	<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
 }
