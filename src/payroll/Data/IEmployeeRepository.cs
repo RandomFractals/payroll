@@ -17,6 +17,6 @@ namespace payroll.Data
 
 		Task<bool> UpdateEmployeeAsync(Employee employee);
 
-		Task<IEnumerable<Employee>> GetAllEmployees(string nameSearchString);
+		Task<IEnumerable<Employee>> GetEmployees();
 	}
 }

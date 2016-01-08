@@ -54,7 +54,7 @@ namespace payroll.Data
 		}
 
 
-		public async Task<IEnumerable<Employee>> GetAllEmployees(string nameSearchString)
+		public async Task<IEnumerable<Employee>> GetEmployees()
 		{
 			return await _context.Employees
 					.Include(e => e.Dependents).ToListAsync();
