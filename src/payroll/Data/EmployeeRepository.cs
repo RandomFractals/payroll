@@ -12,6 +12,7 @@ namespace payroll.Data
 	{
 
 		private EmployeeDataContext _context;
+
 		public EmployeeRepository(EmployeeDataContext context)
 		{
 			_context = context;

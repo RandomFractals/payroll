@@ -12,9 +12,10 @@ namespace payroll.Controllers
 {
 	public class EmployeeController : Controller
 	{
-
+		
 		[FromServices]
 		public EmployeeRepository EmployeeRepository { get; set; }
+		
 
 		// GET: /<controller>/
 		public async Task<ActionResult> Index(string sortOrder, string searchString)
