@@ -16,18 +16,12 @@ namespace payroll.Controllers
 		[FromServices]
 		public EmployeeRepository EmployeeRepository { get; set; }
 
-
-		[FromServices]
-		public EmployeeDataContext EmployeeDataContext { get; set; }
-
 		// GET: /<controller>/
 		public async Task<ActionResult> Index(string sortOrder, string searchString)
 		{
 			// get employees
 			// TODO: add pagination with Skip(PageIndex*ItemsPerPage) and Take(ItermsPerPage)
-			var employees = //EmployeeDataContext.Employees
-				await EmployeeRepository.GetEmployeesAsync();
-					//.Include(e => e.Dependents).ToList();
+			var employees = await EmployeeRepository.GetEmployeesAsync();
 
 			// init list view sort order
 			ViewBag.NameSortOrder = String.IsNullOrEmpty(sortOrder) ? "NameDesc" : "";
@@ -36,7 +30,7 @@ namespace payroll.Controllers
 
 			if (!String.IsNullOrEmpty(searchString))
 			{
-				// filter by list name
+				// filter by last name
 				employees = employees.Where(e => e.LastName.Contains(searchString)).ToList();
 			}
 
@@ -70,10 +64,7 @@ namespace payroll.Controllers
 
 		public async Task<ActionResult> Dependents(int id)
 		{
-			Employee employee = await EmployeeDataContext.Employees
-					.Include(e => e.Dependents)
-					.SingleOrDefaultAsync(e => e.EmployeeID == id);
-
+			Employee employee = await EmployeeRepository.GetEmployeeAsync(id);
 			if (employee == null)
 			{
 				return View("NotFoundError");
@@ -98,8 +89,7 @@ namespace payroll.Controllers
 			{
 				if (ModelState.IsValid)
 				{
-					EmployeeDataContext.Employees.Add(employee);
-					await EmployeeDataContext.SaveChangesAsync();
+					await EmployeeRepository.AddEmployeeAsync(employee);
 					return RedirectToAction("Index");
 				}
 			}
@@ -114,8 +104,7 @@ namespace payroll.Controllers
 
 		public async Task<ActionResult> EditEmployee(int id)
 		{
-			Employee employee = await GetEmployeeAsync(id);
-
+			Employee employee = await EmployeeRepository.GetEmployeeAsync(id);
 			if (employee == null)
 			{
 				return View("NotFoundError");
@@ -131,9 +120,7 @@ namespace payroll.Controllers
 			try
 			{
 				employee.EmployeeID = id;
-				EmployeeDataContext.Employees.Attach(employee);
-				EmployeeDataContext.Entry(employee).State = EntityState.Modified;
-				await EmployeeDataContext.SaveChangesAsync();
+				await EmployeeRepository.UpdateEmployeeAsync(employee);
 				return RedirectToAction("Index");
 			}
 			catch (DbUpdateException)
@@ -148,7 +135,7 @@ namespace payroll.Controllers
 		[ActionName("DeleteEmployee")]
 		public async Task<ActionResult> ConfirmDelete(int id, bool? retry)
 		{
-			Employee employee = await GetEmployeeAsync(id);
+			Employee employee = await EmployeeRepository.GetEmployeeAsync(id);
 			if (employee == null)
 			{
 				return View("NotFoundError");
@@ -166,9 +153,7 @@ namespace payroll.Controllers
 		{
 			try
 			{
-				Employee employee = await GetEmployeeAsync(id);
-				EmployeeDataContext.Employees.Remove(employee);
-				await EmployeeDataContext.SaveChangesAsync();
+				await EmployeeRepository.DeleteEmployeeAsync(id);
 			}
 			catch (DbUpdateException)
 			{
@@ -176,14 +161,6 @@ namespace payroll.Controllers
 			}
 
 			return RedirectToAction("Index");
-		}
-
-
-		private Task<Employee> GetEmployeeAsync(int id)
-		{
-			return EmployeeDataContext.Employees
-					.Include(e => e.Dependents)
-					.SingleOrDefaultAsync(e => e.EmployeeID == id);
 		}
 	}
 }
