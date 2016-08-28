@@ -1,4 +1,4 @@
-# XYZ Payroll http://xyzpayroll.azurewebsites.net/Employee
+# XYZ Payroll http://xyzpayroll.azurewebsites.net/Employee (no longer live :)
 
 XYZ Payroll is a simple asp.net 5 demo web application that calculates employee benefits payroll deductions according to the following simple rules:
 
