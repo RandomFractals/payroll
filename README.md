@@ -13,60 +13,59 @@ Other assumptions for simplicity:
 
 # App Views
 
-1. Employee List View
+## Employee List View
 
 ![Alt text](https://github.com/RandomFractals/payroll/blob/master/screens/XYZPayrollV2.png?raw=true 
  "Employee List View Screenshot")
  
- 2. Add Employee View
+## Add Employee View
 
 ![Alt text](https://github.com/RandomFractals/payroll/blob/master/screens/AddEmployeeView.png?raw=true 
  "Add Employee View Screenshot")
  
- 3. Dependents List View
+## Update Employee View
+
+![Alt text](https://github.com/RandomFractals/payroll/blob/master/screens/UpdateEmployeeView.png?raw=true 
+ "Update Employee View Screenshot")
+
+## Employee Dependents List View
 
 ![Alt text](https://github.com/RandomFractals/payroll/blob/master/screens/UpdateDependentsListView.png?raw=true 
  "Update Dependents List View Screenshot")
  
- 4. Add Dependent View
+## Add Dependent View
 
 ![Alt text](https://github.com/RandomFractals/payroll/blob/master/screens/AddDependentView.png?raw=true 
  "Add Dependent View Screenshot")
  
- 5. Update Dependent View
+## Update Dependent View
 
 ![Alt text](https://github.com/RandomFractals/payroll/blob/master/screens/UpdateDependentView.png?raw=true 
  "Update Dependent View Screenshot")
  
- 6. Delete Dependent View
+## Delete Dependent View
 
 ![Alt text](https://github.com/RandomFractals/payroll/blob/master/screens/DeleteDependentView.png?raw=true 
  "Delete Dependent View Screenshot")
  
- 7. Update Employee View
-
-![Alt text](https://github.com/RandomFractals/payroll/blob/master/screens/UpdateEmployeeView.png?raw=true 
- "Update Employee View Screenshot")
  
- 8. Delete Employee View
+## Delete Employee View
 
 ![Alt text](https://github.com/RandomFractals/payroll/blob/master/screens/DeleteEmployeeView.png?raw=true 
  "Delete Employee View Screenshot")
  
- 9. About XYZ Payroll View
+## About XYZ Payroll View
 
 ![Alt text](https://github.com/RandomFractals/payroll/blob/master/screens/AboutXYZPayroll.png?raw=true 
  "About XYZ Payroll View Screenshot")
  
 # Summing it up
  
- That's how it's done, Holmes! 
- 
- A dozen of plain vanilla asp.net mvc web app views code gen and coding it all in a few days.
+That's how it's done, Holmes! A dozen of asp.net mvc SPA views in a few days of work by a pro.
 
- So, don't you tell me I got no .net app codes to show. 
+So don't you tell me I got no public asp.net mvc or C# app codes to show. You want tests? I can gen. that too, 
+but there is only so much time I am willing to put into yet another silly jump throough hoops code challenge 
+and this dumb dumb vinalla app coded over a weekend.
  
- You want tests? I'll can gen. some tests for you, but there is only so much I am willing to do for yet another silly code challenge and this dumb dumb.
- 
- This is kindergarten for me, smalls! :) Moving on!
+This is kindergarten apps for me, smalls! :) Moving on!
  
