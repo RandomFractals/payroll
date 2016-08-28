@@ -58,15 +58,15 @@ Other assumptions for simplicity:
 ![Alt text](https://github.com/RandomFractals/payroll/blob/master/screens/AboutXYZPayroll.png?raw=true 
  "About XYZ Payroll View Screenshot")
  
- # Summing it up
+# Summing it up
  
- That's how it's done Holmes! 
+ That's how it's done, Holmes! 
  
- A dozen of plain vanilla asp.net mvc web app code gen and coding in a few days.
+ A dozen of plain vanilla asp.net mvc web app views code gen and coding it all in a few days.
 
  So, don't you tell me I got no .net app codes to show. 
  
- You want tests? I'll gen that some other time. Only so much I am willing to do for yet another silly code challenge. 
+ You want tests? I'll can gen. some tests for you, but there is only so much I am willing to do for yet another silly code challenge and this dumb dumb.
  
- This is kindergarten for me, smalls! :)
+ This is kindergarten for me, smalls! :) Moving on!
  
