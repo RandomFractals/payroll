@@ -58,14 +58,3 @@ Other assumptions for simplicity:
 
 ![Alt text](https://github.com/RandomFractals/payroll/blob/master/screens/AboutXYZPayroll.png?raw=true 
  "About XYZ Payroll View Screenshot")
- 
-# Summing it up
- 
-That's how it's done, Holmes! A dozen of asp.net mvc SPA views in a few days of work by a pro.
-
-So don't you tell me I got no public asp.net mvc or C# app codes to show. You want tests? I can gen. that too, 
-but there is only so much time I am willing to put into yet another silly jump throough hoops code challenge 
-and this dumb dumb vinalla app coded over a weekend.
- 
-This is kindergarten apps for me, smalls! :) Moving on!
- 
